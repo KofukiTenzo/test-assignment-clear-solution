@@ -1,10 +1,12 @@
 package com.example.testassignmentclearsolution.DTO;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class UserDTO {
+import java.time.LocalDate;
+
+public class AddUserDTO {
 
     @Email
     @NotBlank(message = "*required field")
@@ -14,14 +16,15 @@ public class UserDTO {
     private String name;
 
     @NotBlank(message = "*required field")
-    private String secondName;
+    private String second_name;
 
     @NotBlank(message = "*required field")
-    private String birthDate;
+    @JsonFormat(pattern="dd-MM-yyyy")
+    private LocalDate birth_date;
 
     private String address;
 
-    private String phoneNumber;
+    private String phone_number;
 
     public String getEmail() {
         return email;
@@ -40,19 +43,19 @@ public class UserDTO {
     }
 
     public String getSecondName() {
-        return secondName;
+        return second_name;
     }
 
     public void setSecondName(String secondName) {
-        this.secondName = secondName;
+        this.second_name = secondName;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public LocalDate getBirthDate() {
+        return birth_date;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birth_date = birthDate;
     }
 
     public String getAddress() {
@@ -64,10 +67,10 @@ public class UserDTO {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return phone_number;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phoneNumber;
     }
 }

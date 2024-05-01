@@ -1,58 +1,52 @@
 package com.example.testassignmentclearsolution.Entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
 
 @Entity
-@Table(name = "USER")
-public class User implements UserDetails {
-
+@Table(name = "users")
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "EMAIL")
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "SECOND_NAME")
-    private String secondName;
+    @Column(name = "second_name")
+    private String second_name;
 
-    @Column(name = "BIRTH_DATE")
-    private String birthDate;
+    @Column(name = "birth_date")
+    private String birth_date;
 
-    @Column(name = "ADDRESS")
+    @Column(name = "address")
     private String address;
 
-    @Column(name = "PHONE_NUMBER")
-    private String phoneNumber;
+    @Column(name = "phone_number")
+    private String phone_number;
 
     public User() {
 
     }
 
-    public User(Long id, String email, String name, String secondName, String birthDate) {
+    public User(Long id, String email, String name, String second_name, String birth_date) {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.secondName = secondName;
-        this.birthDate = birthDate;
+        this.second_name = second_name;
+        this.birth_date = birth_date;
     }
 
-    public User(Long id, String email, String name, String secondName, String birthDate, String address, String phoneNumber) {
+    public User(Long id, String email, String name, String second_name, String birth_date, String address, String phone_number) {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.secondName = secondName;
-        this.birthDate = birthDate;
+        this.second_name = second_name;
+        this.birth_date = birth_date;
         this.address = address;
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phone_number;
     }
 
     public Long getId() {
@@ -79,20 +73,20 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getSecond_name() {
+        return second_name;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setSecond_name(String secondName) {
+        this.second_name = secondName;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public String getBirth_date() {
+        return birth_date;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setBirth_date(String birthDate) {
+        this.birth_date = birthDate;
     }
 
     public String getAddress() {
@@ -103,46 +97,11 @@ public class User implements UserDetails {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone_number() {
+        return phone_number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public void setPhone_number(String phoneNumber) {
+        this.phone_number = phoneNumber;
     }
 }

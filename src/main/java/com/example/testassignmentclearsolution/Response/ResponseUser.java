@@ -1,2 +1,4 @@
-package com.example.testassignmentclearsolution.Response;public class ResponseUser {
+package com.example.testassignmentclearsolution.Response;
+
+public class ResponseUser {
 }
