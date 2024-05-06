@@ -1,10 +1,13 @@
 package com.example.testassignmentclearsolution.Entity;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
-public class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,38 +18,39 @@ public class User{
     @Column(name = "name")
     private String name;
 
-    @Column(name = "second_name")
-    private String second_name;
+    @Column(name = "secondName")
+    private String secondName;
 
-    @Column(name = "birth_date")
-    private String birth_date;
+    @Column(name = "birthDate")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate birthDate;
 
     @Column(name = "address")
     private String address;
 
-    @Column(name = "phone_number")
-    private String phone_number;
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
 
     public User() {
 
     }
 
-    public User(Long id, String email, String name, String second_name, String birth_date) {
+    public User(Long id, String email, String name, String secondName, LocalDate birthDate) {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.second_name = second_name;
-        this.birth_date = birth_date;
+        this.secondName = secondName;
+        this.birthDate = birthDate;
     }
 
-    public User(Long id, String email, String name, String second_name, String birth_date, String address, String phone_number) {
+    public User(Long id, String email, String name, String secondName, LocalDate birthDate, String address, String phoneNumber) {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.second_name = second_name;
-        this.birth_date = birth_date;
+        this.secondName = secondName;
+        this.birthDate = birthDate;
         this.address = address;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
     }
 
     public Long getId() {
@@ -73,20 +77,20 @@ public class User{
         this.name = name;
     }
 
-    public String getSecond_name() {
-        return second_name;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setSecond_name(String secondName) {
-        this.second_name = secondName;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
-    public String getBirth_date() {
-        return birth_date;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirth_date(String birthDate) {
-        this.birth_date = birthDate;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getAddress() {
@@ -97,11 +101,11 @@ public class User{
         this.address = address;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phoneNumber) {
-        this.phone_number = phoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

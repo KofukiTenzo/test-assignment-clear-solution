@@ -1,12 +1,17 @@
 package com.example.testassignmentclearsolution.Web;
 
 import com.example.testassignmentclearsolution.DTO.AddUserDTO;
+import com.example.testassignmentclearsolution.DTO.DateRangeDTO;
 import com.example.testassignmentclearsolution.DTO.UpdatingUserDTO;
 import com.example.testassignmentclearsolution.Entity.User;
 import com.example.testassignmentclearsolution.Service.UserService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -23,9 +28,9 @@ public class UserController {
         try {
             userService.isEighteenYO(addUserDTO.getBirthDate());
 
-            userService.addUser(addUserDTO);
+            User user = userService.addUser(addUserDTO);
 
-            return ResponseEntity.ok("User added!");
+            return ResponseEntity.ok(user);
         } catch (Exception exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());
         }
@@ -74,6 +79,13 @@ public class UserController {
 
         userService.deleteUser(userId);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/findDateOfBirth")
+    public ResponseEntity<List<User>> findUsersByBirthdateRange(@RequestBody DateRangeDTO dateRangeDTO) {
+
+        List<User> users = userService.findUsersByBirthdateRange(dateRangeDTO.getFromDate(), dateRangeDTO.getToDate());
+        return ResponseEntity.ok(users);
     }
 }

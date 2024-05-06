@@ -19,12 +19,24 @@ public class AddUserDTO {
     private String second_name;
 
     @NotBlank(message = "*required field")
-    @JsonFormat(pattern="dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate birth_date;
 
     private String address;
 
     private String phone_number;
+
+    public AddUserDTO() {
+    }
+
+    public AddUserDTO(String email, String name, String second_name, LocalDate birth_date, String address, String phone_number) {
+        this.email = email;
+        this.name = name;
+        this.second_name = second_name;
+        this.birth_date = birth_date;
+        this.address = address;
+        this.phone_number = phone_number;
+    }
 
     public String getEmail() {
         return email;

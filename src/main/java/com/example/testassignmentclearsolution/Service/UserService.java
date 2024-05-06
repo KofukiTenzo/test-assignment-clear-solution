@@ -7,7 +7,7 @@ import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -18,17 +18,17 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void addUser(AddUserDTO input) {
+    public User addUser(AddUserDTO input) {
 
         User user = new User();
         user.setName(input.getName());
-        user.setSecond_name(input.getSecondName());
+        user.setSecondName(input.getSecondName());
         user.setEmail(input.getEmail());
-        user.setBirth_date(dateFormat(input.getBirthDate()));
+        user.setBirthDate(input.getBirthDate());
         user.setAddress(input.getAddress());
-        user.setPhone_number(input.getPhoneNumber());
+        user.setPhoneNumber(input.getPhoneNumber());
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public User updateUserField(Long userId, String newEmail, String newName, String newSecondName, LocalDate newBirthDate, String newAddress, String newPhoneNumber) {
@@ -48,11 +48,11 @@ public class UserService {
         }
 
         if (newSecondName != null){
-            user.setSecond_name(newSecondName);
+            user.setSecondName(newSecondName);
         }
 
         if (newBirthDate != null){
-            user.setBirth_date(dateFormat(newBirthDate));
+            user.setBirthDate(newBirthDate);
         }
 
         if (newAddress != null){
@@ -60,7 +60,7 @@ public class UserService {
         }
 
         if (newPhoneNumber != null){
-            user.setPhone_number(newPhoneNumber);
+            user.setPhoneNumber(newPhoneNumber);
         }
 
         return userRepository.save(user);
@@ -84,10 +84,10 @@ public class UserService {
 
         user.setEmail(newEmail);
         user.setName(newName);
-        user.setSecond_name(newSecondName);
-        user.setBirth_date(dateFormat(newBirthDate));
+        user.setSecondName(newSecondName);
+        user.setBirthDate(newBirthDate);
         user.setAddress(newAddress);
-        user.setPhone_number(newPhoneNumber);
+        user.setPhoneNumber(newPhoneNumber);
 
         return userRepository.save(user);
     }
@@ -97,15 +97,15 @@ public class UserService {
 
     }
 
-    public boolean existsById(Long userId){
-        return userRepository.existsById(userId);
+    public List<User> findUsersByBirthdateRange(LocalDate fromDate, LocalDate toDate) {
+        if (fromDate.isAfter(toDate)) {
+            throw new IllegalArgumentException("Date 'From' must be before date 'To'");
+        }
+        return userRepository.findUsersByBirthDateBetween(fromDate, toDate);
     }
 
-    private String dateFormat(LocalDate inputDate) {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-        return inputDate.format(formatter);
+    public boolean existsById(Long userId){
+        return userRepository.existsById(userId);
     }
 
     public void isEighteenYO(LocalDate inputDate) {
