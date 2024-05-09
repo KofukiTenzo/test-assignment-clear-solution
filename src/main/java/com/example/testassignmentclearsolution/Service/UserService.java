@@ -1,6 +1,7 @@
 package com.example.testassignmentclearsolution.Service;
 
 import com.example.testassignmentclearsolution.DTO.AddUserDTO;
+import com.example.testassignmentclearsolution.DTO.DateRangeDTO;
 import com.example.testassignmentclearsolution.Data.UserRepository;
 import com.example.testassignmentclearsolution.Entity.User;
 import jakarta.validation.ValidationException;
@@ -97,11 +98,11 @@ public class UserService {
 
     }
 
-    public List<User> findUsersByBirthdateRange(LocalDate fromDate, LocalDate toDate) {
-        if (fromDate.isAfter(toDate)) {
+    public List<User> findUsersByBirthdateRange(DateRangeDTO dates) {
+        if (dates.getFromDate().isAfter(dates.getToDate())) {
             throw new IllegalArgumentException("Date 'From' must be before date 'To'");
         }
-        return userRepository.findUsersByBirthDateBetween(fromDate, toDate);
+        return userRepository.findUsersByBirthDateBetween(dates.getFromDate(), dates.getToDate());
     }
 
     public boolean existsById(Long userId){

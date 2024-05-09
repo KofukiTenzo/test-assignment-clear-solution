@@ -1,10 +1,11 @@
 package com.example.testassignmentclearsolution.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-
+@Data
 @Entity
 @Table(name = "users")
 public class User {
@@ -30,28 +31,6 @@ public class User {
 
     @Column(name = "phoneNumber")
     private String phoneNumber;
-
-    public User() {
-
-    }
-
-    public User(Long id, String email, String name, String secondName, LocalDate birthDate) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.secondName = secondName;
-        this.birthDate = birthDate;
-    }
-
-    public User(Long id, String email, String name, String secondName, LocalDate birthDate, String address, String phoneNumber) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.secondName = secondName;
-        this.birthDate = birthDate;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-    }
 
     public Long getId() {
         return id;
